@@ -19,7 +19,7 @@ def run(digits):
     print("Your solution is: {} (part 1), {} (part 2)".format(solution_1, solution_2))
 
 
-if len(sys.argv) == 1:
+if len(sys.argv) != 2:
     raise Exception("Syntax: python day1.py [input]")
 else:
     run(sys.argv[1])
