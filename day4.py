@@ -1,5 +1,7 @@
 """
-Solution for http://adventofcode.com/2017/day/4/answer
+Solution for http://adventofcode.com/2017/day/4
+
+Run using: python day4.py
 """
 
 
