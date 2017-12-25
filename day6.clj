@@ -22,15 +22,24 @@
           (next-idx i size)
           (assoc ls i (inc (nth ls i))))))))
 
-(defn reallocate-all [input]
-  (loop [cur  input
-         cnt  0
-         seen (set #{})]
-    (if (not (= cnt (count seen)))
-      cnt
-      (let [next-ls (reallocate (vec cur))]
-        (recur next-ls
-          (inc cnt)
-          (conj seen next-ls))))))
+(defn ls-key [input]
+   (str/replace (str input) #"\s" "-"))
 
-(println (reallocate-all input))
+(defn reallocate-all [input]
+  (loop [ls  input
+         k   (ls-key input)
+         cnt  0
+         seen {}]
+    (if (contains? seen k)
+       (do
+        (println "Total cycles: " cnt)
+        (println "Loop cycles: " (- cnt (get seen k))))
+      (let [next-ls (reallocate ls)
+            next-k (ls-key next-ls)
+            next-cnt (inc cnt)]
+        (recur next-ls
+          next-k
+          next-cnt
+          (assoc seen k cnt))))))
+
+(reallocate-all (vec input))
